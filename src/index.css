@@ -1,0 +1,294 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Oswald', sans-serif;
+  overflow-y:scroll;
+  margin-bottom:100px;
+}
+
+ul{
+  list-style-type:none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    cursor: pointer;
+    color:inherit;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+  box-shadow: none;
+}
+
+.btn:hover{
+  color:inherit !important;
+}
+
+.navbar{
+  font-size:25px;
+  height:50px;
+}
+
+.entry-header{
+  height:250px;
+  background-color:lightgray;
+  width:100%;
+  background-image: url(http://ezcomsoftware.com/wp-content/uploads/2017/11/hi-tech-concepts-on-blue-background-header.jpg);
+  background-repeat: no-repeat;
+  background-size:100%;
+  margin-bottom:50px;
+}
+
+.entry-header .container{
+  text-align:center;
+  padding-top:80px;
+  cursor:pointer;
+}
+
+
+.entry-header-title{
+  font-size:55px;
+  color:white;
+  text-shadow: 5px 5px 8px #000000;
+}
+
+.entry-header-subtitle{
+  margin-top:50px;
+  color:white;
+  opacity:0.8;
+  font-size:30px;
+}
+
+.entry-header-subtitle:hover {
+  text-decoration:underline;
+}
+
+
+.back-show-button{
+  margin-left:200px;
+  margin-bottom:50px;
+}
+
+.show-page-container{
+  width:50%;
+}
+
+.show-page-title{
+  font-size:55px;
+  line-height: 0.75 em;
+}
+
+.show-page-subtitle{
+  font-family: 'Noto Sans', sans-serif;
+  font-size:25px;
+  font-weight:900;
+  opacity:0.8;
+}
+
+.custom-button{
+  width:200px;
+}
+
+.show-page-content{
+  margin-top:15px;
+  font-size:30px;
+  opacity:0.8;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.show-page-image{
+  width:100%;
+  max-width:100%;
+  max-height:450px;
+}
+
+.post-date{
+  color:lightgray;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.5s;
+}
+
+.post-date:hover{
+  color:black;
+  transition:0.5s
+}
+
+.main-footer{
+  border-top:1px solid lightgray;
+  margin-top:100px;
+}
+
+
+.page-index-title{
+  font-size:55px;
+}
+
+.page-index{
+  margin-top:30px;
+  text-align:center;
+}
+
+.page-index-start-button{
+  font-size:50px;
+  border-radius : 15px;
+  box-shadow: 0px 10px #444444;
+}
+
+.page-index-start-button:active{
+  box-shadow:none;
+  transform:translateY(5px);
+}
+
+.top-list-container{
+  margin-top:30px;
+  background-color:lightgray;
+  border-radius:15px;
+}
+
+.top-list-item-number{
+  font-size:50px;
+  opacity:0.6;
+}
+
+.top-list-item-title{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.top-list-item-description{
+  font-size:15px;
+  opacity:0.5
+}
+
+.top-list-item-description a{
+  font-weight:bold;
+}
+
+.top-list-item{
+  cursor:pointer;
+  background-color:white;
+  margin:15px;
+  padding:5px;
+}
+
+.top-posts-list li div{
+  display:inline-block;
+}
+
+.post-miniature{
+  padding:1.5%;
+  text-align:center;
+  border-radius:15px;
+  margin-bottom:50px;
+  height:450px;
+}
+
+.miniature-title{
+  font-size:35px;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.miniature-image-container{
+  height:250px;
+  position:relative;
+}
+
+
+.create-post-button{
+  margin-left:450px;
+  margin-bottom:50px;
+  font-size:25px;
+}
+
+.posts-container{
+  margin-top:80px;
+}
+
+.miniature-sub-container{
+  border-radius:15px;
+  transition:0.5s;
+  margin-bottom:20px;
+}
+
+.miniature-sub-container:hover .miniature-image-overlay{
+  opacity:0.7;
+}
+
+.miniature-sub-container:hover{
+  color:#59bbc6;
+  transition: 0.5s ease;
+}
+
+.miniature-image-container img{
+  width:100%;
+  height:100%;
+  border-radius:15px;
+}
+
+.miniature-image-overlay{
+  position:absolute;
+  top:0;
+  height:100%;
+  width:100%;
+  left:0;
+  right:0;
+  bottom:0;
+  opacity:0;
+  transition:0.5s ease;
+  background-color:#7198d6;
+  border-radius:15px;
+  padding-top:35px;
+}
+
+.post-topic{
+  color:lightgray !important;
+  transition:0.5s;
+  font-size:15px;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+.post-topic:hover{
+  color:black !important;
+  transition:0.5s;
+}
+
+.miniature-image-overlay button{
+  margin-top:50px;
+  font-size:30px;
+}
+
+.post-form-container{
+  width:50%;
+  text-align:center;
+  margin-top:80px;
+}
+
+.content-field{
+  resize: none;
+  height:250px !important;
+}
+
+.collapse-container{
+  position:fixed;
+  top:40%;
+  left:0px;
+  border:none !important;
+}
+
+.expand-options-button{
+  width:200px;
+  margin-left:50px;
+}
+
+.option-buttons-container{
+  margin-left:30px;
+  text-align:center;
+}
+
+.option-buttons-container li{
+  margin-left:-40px;
+}

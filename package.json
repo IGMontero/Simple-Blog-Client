@@ -2,7 +2,7 @@
   "name": "first-react-redux",
   "version": "0.1.0",
   "private": true,
-  "proxy" : "https://simple-blog-server.herokuapp.com/",
+  "proxy": "https://simple-blog-server.herokuapp.com/",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
@@ -17,7 +17,9 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

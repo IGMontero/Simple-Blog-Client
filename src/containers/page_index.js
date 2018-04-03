@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-import TopPostsList from './top_posts_list'
+import TopPostsList from '../components/top_posts_list'
 
 
 export default function(props){

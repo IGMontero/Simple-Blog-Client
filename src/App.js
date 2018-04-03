@@ -4,13 +4,13 @@ import { Route , Switch} from 'react-router-dom'
 
 //Components
 import NavBar from './components/navbar';
-import EntryHeader from './components/entry_header';
+import EntryHeader from './containers/entry_header';
 import Footer from './components/footer';
-import PageIndex from './components/page_index';
-import PagePosts from './components/page_posts';
-import PageNewPost from './components/page_new_post';
-import PageShowPost from './components/page_show_post';
-import PageEditPost from './components/page_edit_post';
+import PageIndex from './containers/page_index';
+import PagePosts from './containers/page_posts';
+import PageNewPost from './containers/page_new_post';
+import PageShowPost from './containers/page_show_post';
+import PageEditPost from './containers/page_edit_post';
 
 
 class App extends Component {

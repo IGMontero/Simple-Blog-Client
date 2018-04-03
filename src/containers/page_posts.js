@@ -4,7 +4,7 @@ import { fetchPosts } from '../actions';
 import _ from 'lodash';
 import { Link } from 'react-router-dom'
 
-import PostMiniature from './post_miniature';
+import PostMiniature from '../components/post_miniature';
 
 class PagePosts extends Component{
 

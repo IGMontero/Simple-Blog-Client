@@ -8,16 +8,12 @@ export default class PostOptions extends Component{
 
   const { changeView , view } = this.props;
 
-
-  const editClassName = `fas fa-pencil-alt nav-link ${!view ? '' : 'active'}`;
-  const previewClassName = `fas fa-eye nav-link ${view ? 'active' : ''}`;
-
   return(
     <nav className = "navbar navbar-light bg-light navbar-expand-lg field-content-option-nav mb-2">
       <ul className = "navbar-nav">
         {/* Modal triggerer */}
-        <li className = "nav-item" onClick={()=> changeView(0)}><i title = "edit post" className={editClassName}></i></li>
-        <li className = "nav-item" onClick={()=> changeView(1)}><i title = "preview post" className={previewClassName}></i></li>
+        <li className = "nav-item" onClick={()=> changeView(0)}><i title = "edit post" className='fas fa-pencil-alt nav-link'></i></li>
+        <li className = "nav-item" onClick={()=> changeView(1)}><i title = "preview post" className='fas fa-eye nav-link'></i></li>
         <li className = "nav-item"><i className="fas fa-info-circle nav-link" title="markdown info" data-toggle="modal" data-target = "#modal-markdown-info" title="preview" ></i></li>
       </ul>
       {/* Modal  start */}

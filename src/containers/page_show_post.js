@@ -44,7 +44,7 @@ class PageShowPost extends Component{
     return(
 
       <div className="container show-page-container">
-        <Link to = "/posts" className="btn btn-danger custom-button back-show-button"><i className="fas fa-arrow-left"></i> Back</Link><br/>
+        <Link to = "/posts" className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link><br/>
         <span className="post-topic">{post.generalTopic}</span><br/>
         <span className = "post-date">{postDate}</span>
         <h1 className= "mb-3 show-page-title" >{post.title}</h1>

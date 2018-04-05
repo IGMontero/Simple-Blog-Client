@@ -55,12 +55,13 @@ class PageEditPost extends Component{
 
     return(
       <div className="container post-form-container">
-      <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
-      {!this.state.view ? (
-        <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />
-        ) : (
-        <PostPreview values={formState.values} />
-      ) }
+        <Link to = {`/posts/${this.props.match.params.id}`} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link>
+        <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
+        {!this.state.view ? (
+          <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />
+          ) : (
+          <PostPreview values={formState.values} />
+        ) }
       </div>
     )
   }

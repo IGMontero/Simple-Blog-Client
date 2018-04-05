@@ -43,7 +43,6 @@ export default class PostForm extends Component{
       />
       <div className="mt-5">
         <button type="submit" className="btn btn-success custom-button">Submit</button>
-        <Link to = "/posts" className="btn btn-danger ml-2 custom-button">Back</Link>
       </div>
     </form>
   )

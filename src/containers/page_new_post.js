@@ -9,9 +9,20 @@ import { createPost } from '../actions/index';
 //Functions
 import validate from '../utils/validation/validatePost';
 import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../utils/fields/renderField'
-
+import PostOptionsNav  from '../components/post_options_nav';
+import PostForm from '../components/post_form';
+import PostPreview from '../components/post_preview';
 
   class PageNewPost extends Component{
+
+    constructor(props){
+      super(props);
+
+      this.state = {
+        view:false
+      }
+
+    }
 
 
     onSubmit(values){
@@ -20,56 +31,47 @@ import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../u
       });
     }
 
+
+    //Changes the view depending on the last clicked button.
+    //Value 0 means 'editor' , value 1 means 'preview'.
+    changeView(value){
+      value ? this.setState({view:true}) : this.setState({view:false});
+    }
+
     render(){
 
       const { handleSubmit } = this.props;
 
+       const formState = this.props.formState.PostsNewForm;
+
+       //Si no tiene valores todavia, darle un objeto vacio
+       //para que renderice.
+       if(!formState.values){
+         formState.values = {};
+       }
+
       return(
       <div className="container post-form-container">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-          label = "Title"
-          name="title"
-          type="text"
-          component={renderFieldInput}
-          />
-          <Field
-          label="Subtitle"
-          name = "subtitle"
-          type="text"
-          component={renderFieldInput}
-          />
-          <Field
-          label="Content"
-          name = "content"
-          component={renderFieldTextArea}
-          />
-          <Field
-          label = "Topic"
-          name = "generalTopic"
-          component = {renderFieldSelect}
-          />
-          <Field
-          label="Image URL"
-          name = "image"
-          type = "text"
-          component={renderFieldInput}
-          />
-          <div className="mt-5">
-            <button type="submit" className="btn btn-success custom-button">Submit</button>
-            <Link to = "/posts" className="btn btn-danger ml-2 custom-button">Back</Link>
-          </div>
-        </form>
+        <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
+        {!this.state.view ? (
+          <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />
+        ) : (
+        <PostPreview values={formState.values} />
+        ) }
       </div>
       )
     }
   }
 
 
+  function mapStateToProps( state ){
+    return { formState : state.form }
+  }
+
 
 export default reduxForm({
   form : 'PostsNewForm',
   validate
 })(
-  connect(null , {createPost} )(PageNewPost)
+  connect(mapStateToProps , {createPost} )(PageNewPost)
 )

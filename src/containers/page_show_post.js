@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost , deletePost } from '../actions/index';
+import marked from 'marked';
 
 class PageShowPost extends Component{
 
@@ -36,8 +37,9 @@ class PageShowPost extends Component{
       return string;
     }
 
+    //Adding 1 to the month because it shows 1 less , no idea why.
     const d = new Date(post.createdAt);
-    const postDate = `${addZero(d.getMonth())} / ${addZero(d.getDate())} / ${addZero(d.getFullYear())}`;
+    const postDate = `${addZero(d.getMonth()+1)} / ${addZero(d.getDate())} / ${addZero(d.getFullYear())}`;
 
     return(
 
@@ -48,8 +50,8 @@ class PageShowPost extends Component{
         <h1 className= "mb-3 show-page-title" >{post.title}</h1>
         <h4 className="mb-3 show-page-subtitle">{post.subtitle}</h4>
         <img src = {post.image} className="show-page-image" />
-        <p className="show-page-content">{post.content}</p>
-
+        <p className="show-page-content" dangerouslySetInnerHTML={ {__html:marked(post.content)} } ></p>
+        {/* Collapse start */}
         <div className = "collapse-container">
           <a className="btn btn-warning collapse-option-buttons expand-options-button" data-toggle="collapse" href="#buttons-collapse" role="button" aria-expanded="false" aria-controls="buttons-collapse">
           <i className="fas fa-cog"></i> Options
@@ -67,6 +69,7 @@ class PageShowPost extends Component{
             </div>
           </div>
         </div>
+        { /* Collapse end */}
       </div>
     )
   }

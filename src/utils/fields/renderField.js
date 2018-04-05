@@ -1,10 +1,11 @@
 import React from 'react';
 
+
 export function renderFieldInput(field){
 
   //Validate and display possible errors on the input field.
-  const { meta : { touched, error}} = field;
-  const inputClassName = `form-control ${ touched && error ? 'is-invalid' : ''}`;
+  const { meta : { error , submitFailed}} = field;
+  const inputClassName = `form-control ${ submitFailed && error ? 'is-invalid' : ''}`;
 
   return(
     <div className="form-group">
@@ -15,7 +16,7 @@ export function renderFieldInput(field){
       {...field.input}
        />
        <div className="invalid-feedback">
-          {touched ? error : ''}
+          {submitFailed ? error : ''}
        </div>
     </div>
   )
@@ -24,8 +25,8 @@ export function renderFieldInput(field){
 export function renderFieldTextArea(field){
 
 
-  const { meta : { touched, error}} = field;
-  const inputClassName = `form-control content-field ${ touched && error ? 'is-invalid' : ''}`;
+  const { meta : { error , submitFailed} } = field;
+  const inputClassName = `form-control content-field ${ submitFailed && error ? 'is-invalid' : ''}`;
 
   return(
     <div className="form-group">
@@ -35,7 +36,7 @@ export function renderFieldTextArea(field){
       {...field.input}
       />
       <div className= "invalid-feedback">
-        {touched ? error : ''}
+        {submitFailed ? error : ''}
       </div>
     </div>
   )
@@ -43,8 +44,10 @@ export function renderFieldTextArea(field){
 
 export function renderFieldSelect(field){
 
-  const { meta: { touched, error }} = field;
-  const inputClassName = `custom-select ${ touched && error ? 'is-invalid' : '' }`;
+  const { meta: { error , submitFailed }} = field;
+  const inputClassName = `custom-select ${ submitFailed && error ? 'is-invalid' : '' }`;
+
+
 
   return(
     <div>
@@ -56,7 +59,7 @@ export function renderFieldSelect(field){
         <option value = "Future Society">Future Society</option>
       </select>
       <div className = "invalid-feedback">
-        {touched ? error : ''}
+        {submitFailed ? error : ''}
       </div>
     </div>
   )

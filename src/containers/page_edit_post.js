@@ -7,11 +7,25 @@ import { fetchPost , editPost } from '../actions/index';
 
 //Functions
 import validate from '../utils/validation/validatePost';
-import { renderFieldInput , renderFieldSelect , renderFieldTextArea } from '../utils/fields/renderField';
-
+import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../utils/fields/renderField';
+import PostOptionsNav from '../components/post_options_nav';
+import PostForm from '../components/post_form';
+import PostPreview from '../components/post_preview';
 
 class PageEditPost extends Component{
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      view:false
+    }
+
+  }
+
+  changeView(value){
+    value ? this.setState({view:true}) : this.setState({view:false});
+  }
 
 
   onSubmit(values){
@@ -31,6 +45,8 @@ class PageEditPost extends Component{
     const post = this.props.post;
     const { handleSubmit } = this.props;
 
+    const formState = this.props.formState.PostsEditForm;
+
 
     if(!post)
       return(
@@ -39,50 +55,23 @@ class PageEditPost extends Component{
 
     return(
       <div className="container post-form-container">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-          label = "Title"
-          name="title"
-          type="text"
-          component={renderFieldInput}
-          />
-          <Field
-          label="Subtitle"
-          name = "subtitle"
-          type="text"
-          component={renderFieldInput}
-          />
-          <Field
-          label="Content"
-          name = "content"
-          component={renderFieldTextArea}
-          />
-          <Field
-          label="Image URL"
-          name = "image"
-          type = "text"
-          component={renderFieldInput}
-          />
-          <Field
-          label = "Topic"
-          name = "generalTopic"
-          component = {renderFieldSelect}
-          />
-          <div className="mt-5">
-            <button type="submit" className="btn btn-success custom-button">Submit</button>
-            <Link to = "/posts" className="btn btn-danger ml-2 custom-button">Back</Link>
-          </div>
-        </form>
+      <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
+      {!this.state.view ? (
+        <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />
+        ) : (
+        <PostPreview values={formState.values} />
+      ) }
       </div>
     )
   }
 }
 
-function mapStateToProps( { posts } , ownProps ){
+function mapStateToProps( { posts , form } , ownProps ){
   const post = posts[ownProps.match.params.id];
   return {
     post : posts[ownProps.match.params.id],
-    initialValues : posts[ownProps.match.params.id]
+    initialValues : posts[ownProps.match.params.id],
+    formState : form
     }
 }
 

@@ -2,7 +2,7 @@
   "name": "first-react-redux",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "https://simple-blog-server.herokuapp.com/",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",

@@ -10,7 +10,6 @@ class EntryHeader extends Component{
     const {path , params : {id} , isExact} = this.props.match;
 
     //hardcode ftw
-
     var title,subtitle;
     const post = this.props.post;
 
@@ -33,6 +32,14 @@ class EntryHeader extends Component{
       break;
       case '/posts/:id/edit':
         title = "Edit post";
+      break;
+      case '/register':
+        title = 'Register';
+        subtitle = 'Join us !';
+      break;
+      case '/login':
+        title = 'Log In';
+        subtitle = 'Welcome back !';
       break;
     }
 

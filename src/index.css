@@ -16,6 +16,10 @@ a:link, a:visited {
     color:inherit;
 }
 
+.nav-link{
+  cursor:pointer;
+}
+
 .btn:focus,.btn:active:focus,.btn.active:focus,
 .btn.focus,.btn:active.focus,.btn.active.focus {
   box-shadow: none;
@@ -65,9 +69,10 @@ a:link, a:visited {
 }
 
 
-.back-button{
-  margin-left:250px;
-  margin-bottom:50px;
+
+
+.user-form-container{
+  text-align:center;
 }
 
 .show-page-container{
@@ -284,8 +289,18 @@ a:link, a:visited {
   width:50%;
 }
 
-.post-form{
+.user-form-container{
+  width:35%;
+}
+
+form{
   text-align:center;
+  margin-top:50px;
+  margin-bottom:40px;
+}
+
+.form-bottom-container{
+  margin-top:50px;
 }
 
 .content-field{
@@ -335,4 +350,19 @@ a:link, a:visited {
 
 #modal-markdown-info{
   margin-top:150px;
+}
+
+.form-bottom-container{
+  margin-top:35px;
+}
+
+.form-top-container{
+  width:100%;
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.show-page-top-container{
+  text-align:center;
+  margin-bottom:50px;
 }

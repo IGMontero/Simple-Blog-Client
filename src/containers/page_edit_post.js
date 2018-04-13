@@ -30,9 +30,10 @@ class PageEditPost extends Component{
 
   onSubmit(values){
     const id = this.props.match.params.id;
-    this.props.editPost(id , values ,  ()=>{
-        this.props.history.push(`/posts/${id}`);
-    })
+    this.props.editPost(id , values , ()=>{
+      this.props.history.push(`/posts/${id}`);
+    });
+
   }
 
   componentDidMount(){
@@ -55,7 +56,9 @@ class PageEditPost extends Component{
 
     return(
       <div className="container post-form-container">
-        <Link to = {`/posts/${this.props.match.params.id}`} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link>
+        <div className="form-top-container">
+          <Link to = {`/posts/${this.props.match.params.id}`} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link>
+        </div>
         <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
         {!this.state.view ? (
           <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />

@@ -8,10 +8,9 @@ import PostMiniature from '../components/post_miniature';
 
 class PagePosts extends Component{
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.fetchPosts();
   }
-
 
   renderPosts(){
 
@@ -32,16 +31,23 @@ class PagePosts extends Component{
   }
 
   render(){
-
     if(!this.props.posts){
       return(
         <div>Loading...</div>
       )
     }
 
+    const {userId} = this.props;
+
+    //Show the create post window only if the user is authenticated.
+    var createPostClassName = "btn btn-warning create-post-button";
+    if(_.isEmpty(userId)){
+      createPostClassName += " invisible";
+    }
+
     return(
       <div className = "container posts-container">
-      <Link to = "/posts/new" className = "btn btn-warning create-post-button">
+      <Link to = "/posts/new" className = {createPostClassName} >
       <i className="fas fa-plus-square mr-3"></i>Create a new Post</Link>
         <div className = "row">
             {this.renderPosts()}
@@ -51,8 +57,11 @@ class PagePosts extends Component{
   }
 }
 
-function mapStateToProps (state){
-  return {posts : state.posts}
+function mapStateToProps ({posts , user}){
+  return {
+    posts : posts,
+    userId : user
+  }
 }
 
 export default connect(mapStateToProps,{ fetchPosts })(PagePosts);

@@ -52,7 +52,9 @@ import PostPreview from '../components/post_preview';
 
       return(
       <div className="container post-form-container">
-        <Link to = {`/posts/`} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link>
+        <div className="form-top-container">
+          <Link to = {`/posts/`} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link>
+        </div>
         <PostOptionsNav view={this.state.view} changeView = { this.changeView.bind(this) } />
         {!this.state.view ? (
           <PostForm onSubmit = {handleSubmit(this.onSubmit.bind(this))} />

@@ -12,7 +12,7 @@ export default class PostForm extends Component{
 
   const { onSubmit } = this.props;
   return(
-    <form className = "post-form" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit}>
       <Field
       label = "Title"
       name="title"
@@ -41,7 +41,7 @@ export default class PostForm extends Component{
       type = "text"
       component={renderFieldInput}
       />
-      <div className="mt-5">
+      <div className="form-bottom-container">
         <button type="submit" className="btn btn-success custom-button">Submit</button>
       </div>
     </form>

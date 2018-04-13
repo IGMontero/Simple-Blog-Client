@@ -3,26 +3,30 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost , deletePost } from '../actions/index';
 import marked from 'marked';
+import _ from "lodash";
 
 class PageShowPost extends Component{
 
-  componentDidMount(){
+  componentWillMount(){
     const id = this.props.match.params.id;
     this.props.fetchPost(id);
   }
 
+
   onDeleteClick(){
     const id = this.props.match.params.id;
     this.props.deletePost(id , () =>{
-      //simulate delay
-      setTimeout( ()=>{this.props.history.push('/posts')} , 500);
+        this.props.history.push('/posts');
+    });
+  }
 
-    })
+  checkAuthor(){
+    this.props.history.push("/posts");
   }
 
   render(){
 
-    const post = this.props.post;
+    const { post, userId } = this.props;
 
     if(!post){
       return (
@@ -41,10 +45,22 @@ class PageShowPost extends Component{
     const d = new Date(post.createdAt);
     const postDate = `${addZero(d.getMonth()+1)} / ${addZero(d.getDate())} / ${addZero(d.getFullYear())}`;
 
+    //Edit route setting:
+    // If the user owner is on the page, show the options container,
+    //otherwise hide it.
+    var collapseClassName = "collapse-container invisible";
+    if(!_.isEmpty(userId) && _.isEqual(userId, post.author)){
+      collapseClassName = " collapse-container";
+    }
+
+
+
     return(
 
       <div className="container show-page-container">
-        <Link to = "/posts" className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link><br/>
+        <div className = "show-page-top-container">
+          <Link to = "/posts" className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link><br/>
+        </div>
         <span className="post-topic">{post.generalTopic}</span><br/>
         <span className = "post-date">{postDate}</span>
         <h1 className= "mb-3 show-page-title" >{post.title}</h1>
@@ -52,7 +68,7 @@ class PageShowPost extends Component{
         <img src = {post.image} className="show-page-image" />
         <p className="show-page-content" dangerouslySetInnerHTML={ {__html:marked(post.content)} } ></p>
         {/* Collapse start */}
-        <div className = "collapse-container">
+        <div className = {collapseClassName}>
           <a className="btn btn-warning collapse-option-buttons expand-options-button" data-toggle="collapse" href="#buttons-collapse" role="button" aria-expanded="false" aria-controls="buttons-collapse">
           <i className="fas fa-cog"></i> Options
           </a>
@@ -63,7 +79,7 @@ class PageShowPost extends Component{
                 <a className="btn btn-danger custom-button mt-lg-3 mb-lg-3" onClick={this.onDeleteClick.bind(this)}  ><i className="fas fa-trash-alt"></i> Delete Post</a>
               </li>
               <li>
-                <Link to = {`/posts/${this.props.match.params.id}/edit`} className="btn btn-info custom-button"><i className="fas fa-edit"></i> Edit Post</Link>
+                <Link to = {`/posts/${this.props.match.params.id}/edit`} onClick={ () => this.checkAuthor.bind(this)} className="btn btn-info custom-button"><i className="fas fa-edit"></i> Edit Post</Link>
               </li>
             </ul>
             </div>
@@ -76,8 +92,11 @@ class PageShowPost extends Component{
 }
 
 
-function mapStateToProps( { posts } , ownProps){
-  return {post : posts[ownProps.match.params.id]};
+function mapStateToProps( { posts , user } , ownProps){
+  return {
+    post : posts[ownProps.match.params.id],
+    userId : user
+  };
 }
 
 export default connect(mapStateToProps, { fetchPost , deletePost })(PageShowPost);

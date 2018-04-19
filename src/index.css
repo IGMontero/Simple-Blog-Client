@@ -20,6 +20,17 @@ a:link, a:visited {
   cursor:pointer;
 }
 
+.navbar-username-list{
+  font-size:25px !important;
+}
+.navbar-username-list a span{
+  color : #42ce49 !important;
+}
+
+.navbar-username-list:hover a span{
+  color:#49ff53 !important;
+}
+
 .btn:focus,.btn:active:focus,.btn.active:focus,
 .btn.focus,.btn:active.focus,.btn.active.focus {
   box-shadow: none;
@@ -143,6 +154,18 @@ a:link, a:visited {
 .main-footer{
   border-top:1px solid lightgray;
   margin-top:100px;
+  text-align:center;
+  padding-top:50px;
+}
+
+.footer-contact-buttons a{
+  font-size:40px;
+  transition:0.2s;
+}
+
+.footer-contact-buttons a:hover{
+  color:red;
+  transition:0.2s;
 }
 
 
@@ -207,12 +230,11 @@ a:link, a:visited {
   text-align:center;
   border-radius:15px;
   margin-bottom:50px;
-  height:450px;
 }
 
 .miniature-title{
   font-size:35px;
-  margin-top:15px;
+  margin-top:35px;
   font-weight:bold;
 }
 
@@ -221,6 +243,20 @@ a:link, a:visited {
   position:relative;
 }
 
+.miniature-author-name{
+  position:relative;
+  top:5px;
+  font-size:15px;
+  cursor:pointer;
+  color:lightgray;
+  transition: 0.5s;
+  z-index: 2;
+}
+
+.miniature-author-name:hover{
+  color:steelblue;
+  transition: 0.5s;
+}
 
 .create-post-button{
   margin-left:450px;
@@ -266,6 +302,19 @@ a:link, a:visited {
   border-radius:15px;
   padding-top:35px;
 }
+
+.miniature-profile-picture{
+  position:absolute;
+  left:37%;
+  bottom:-15px;
+  width:80px !important;
+  height:80px !important;
+  border-radius:50% !important;
+  border:11px solid white;
+  z-index:1;
+  transition: 0.5s;
+}
+
 
 .post-topic{
   color:lightgray !important;
@@ -365,4 +414,106 @@ form{
 .show-page-top-container{
   text-align:center;
   margin-bottom:50px;
+}
+
+.user-card-main-container{
+  position:relative;
+}
+
+.user-card-info-container{
+  height:250px;
+  display:inline;
+}
+
+.user-card-username{
+  font-size:45px;
+  font-weight: 600;
+}
+
+.user-card-profile-picture{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  float:left;
+}
+
+.user-card-info{
+  display:inline-block;
+  margin-left:20px;
+  width:700px;
+}
+
+.user-card-description{
+  font-size:25px;
+  font-weight:400;
+  opacity:0.7;
+}
+
+.user-card-country{
+  margin-top:30px;
+}
+
+.user-card-interests{
+  font-size:18px;
+  opacity:0.7;
+  margin-top:15px;
+}
+
+.user-card-interests span{
+  cursor:pointer;
+  opacity:0.5;
+  transition:0.5s;
+
+}
+
+.user-card-interests span:hover{
+  opacity:1;
+  transition:0.5s;
+}
+
+.fa-map-marker-alt{
+    color:#f46b42;
+}
+
+.fa-file-alt{
+  color:#f4cd41;
+}
+
+.fa-angellist{
+  color : #0c81ff;
+}
+
+.btn-outline-dark:hover{
+  color:white !important;
+}
+
+.user-card-buttons{
+  position:absolute;
+  top:15px;
+  right:60px;
+}
+
+.user-card-buttons .btn{
+  margin:10px;
+}
+
+.profile-show-options{
+  text-align:center;
+  margin-top:60px;
+  margin-bottom:50px;
+}
+
+.profile-show-options button{
+  background:none;
+  border: none;
+  cursor:pointer;
+  border-bottom:1px solid #dedfe2;
+  width:150px;
+  height:60px;
+  font-size:30px;
+}
+
+.profile-show-options button:focus{
+  border-bottom:1px solid #31343a;
+  outline:none;
 }

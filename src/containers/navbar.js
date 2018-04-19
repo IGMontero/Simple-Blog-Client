@@ -15,8 +15,8 @@ class Navbar extends Component{
 
   render(){
 
-    const user = this.props.user;
-        
+    const { authenticatedUser } = this.props;
+
     return(
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -26,13 +26,14 @@ class Navbar extends Component{
           <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/posts">Posts</Link></li>
         </ul>
-          { _.isEmpty(user) ? (
+          { _.isEmpty(authenticatedUser) ? (
             <ul className="navbar-nav ml-auto mr-2">
               <li className="nav-item"><Link className="nav-link" to="/login">Log In</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/register">Register</Link></li>
             </ul>
           ) : (
             <ul className="navbar-nav ml-auto mr-2">
+              <li className = "nav-item navbar-username-list"><Link  to={`/users/${authenticatedUser._id}`} className="nav-link">Hi , <span>{authenticatedUser.username}</span> !</Link></li>
               <li className="nav-item"><a className="nav-link" onClick={this.logOutClick.bind(this)}>Log Out</a></li>
             </ul>
           ) }
@@ -42,9 +43,9 @@ class Navbar extends Component{
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps( { authenticatedUser }){
   return{
-    user : state.user
+    authenticatedUser
   }
 }
 

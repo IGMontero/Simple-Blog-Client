@@ -1,8 +1,27 @@
-import { FETCH_POSTS , FETCH_POST , CREATE_POST  , DELETE_POST , EDIT_POST , REGISTER_USER , LOGIN_USER , LOGOUT_USER } from './types';
+import { FETCH_POSTS , FETCH_POST , CREATE_POST
+   , DELETE_POST , EDIT_POST , REGISTER_USER
+   , LOGIN_USER , LOGOUT_USER  , FETCH_USER,
+   AUTHENTICATION_ERROR } from './types';
 import axios from 'axios';
 
 const REDIRECT_DELAY = 400;
 
+export function fetchUser(id){
+
+  return(dispatch) => {
+    axios.get(`/users/${id}`)
+    .then( (response) =>{
+      dispatch({
+        type:FETCH_USER,
+        payload:response
+      })
+    })
+    .catch( (err) =>{
+      console.log(err);
+    });
+  }
+
+}
 
 export function logOutUser(callback){
 
@@ -19,9 +38,7 @@ export function logOutUser(callback){
 
 }
 
-
-export function logInUser( values,  callback ){
-
+export function logInUser( values, showAlert , callback ){
   //Async function to get payload data
   return (dispatch) => {
     axios.post('/login' , values)
@@ -35,12 +52,21 @@ export function logInUser( values,  callback ){
        payload:response.data
      })
     }
- );
+ ).catch( (err) => {
+   //Handle authentication errors
+   if(err.response.status==409){
+     //Show alert message
+     showAlert();
+     dispatch({
+       type:AUTHENTICATION_ERROR,
+       payload:err.response.data
+     });
+   }
+ });
+}
 }
 
-}
-
-export function registerUser(values,callback){
+export function registerUser(values, showAlert ,callback){
 
   return (dispatch)=>{
     axios.post('/register', values)
@@ -50,7 +76,17 @@ export function registerUser(values,callback){
       dispatch({
       type:REGISTER_USER,
       payload:response.data
-    })
+    });
+  })
+  .catch( (err) =>{
+    if(err.response.status==409){
+      //Show alert message
+      showAlert();
+      dispatch({
+        type:AUTHENTICATION_ERROR,
+        payload:err.response.data
+      });
+    }
   });
   }
 }
@@ -65,7 +101,6 @@ export function fetchPosts(){
   }
 }
 
-
 export function fetchPost(id){
   return (dispatch) => {
     axios.get(`/posts/${id}`)
@@ -75,7 +110,6 @@ export function fetchPost(id){
     }))
   }
 }
-
 
 export function deletePost(id , callback){
   return (dispatch) => {
@@ -121,7 +155,6 @@ export function editPost(id,values,callback){
   });
   }
 }
-
 
 export function createPost(values,callback){
   return (dispatch)=>{

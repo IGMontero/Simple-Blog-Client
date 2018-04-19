@@ -7,6 +7,7 @@ export function renderFieldInput(field){
   const { meta : { error , submitFailed}} = field;
   const inputClassName = `form-control ${ submitFailed && error ? 'is-invalid' : ''}`;
 
+
   return(
     <div className="form-group">
       <label>{field.label}</label>
@@ -57,6 +58,7 @@ export function renderFieldSelect(field){
         <option value = "Sports" >Sports</option>
         <option value = "Videogames" >Videogames</option>
         <option value = "Future Society">Future Society</option>
+        <option value = "Nature">Nature</option>
       </select>
       <div className = "invalid-feedback">
         {submitFailed ? error : ''}

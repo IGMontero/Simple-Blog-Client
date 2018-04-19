@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchPost , editPost } from '../actions/index';
 
 //Functions
-import validate from '../utils/validation/validatePost';
+import { validatePost } from '../utils/validation/index';
 import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../utils/fields/renderField';
 import PostOptionsNav from '../components/post_options_nav';
 import PostForm from '../components/post_form';
@@ -85,6 +85,6 @@ function mapStateToProps( { posts , form } , ownProps ){
 export default connect(mapStateToProps, {fetchPost , editPost} )(
   reduxForm({
     form:'PostsEditForm',
-    validate
+    validatePost
   })(PageEditPost)
 )

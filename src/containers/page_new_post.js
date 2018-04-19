@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { createPost } from '../actions/index';
 
 //Functions
-import validate from '../utils/validation/validatePost';
+import { validatePost } from '../utils/validation/index';
 import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../utils/fields/renderField'
 import PostOptionsNav  from '../components/post_options_nav';
 import PostForm from '../components/post_form';
@@ -42,13 +42,9 @@ import PostPreview from '../components/post_preview';
 
       const { handleSubmit } = this.props;
 
-       const formState = this.props.formState.PostsNewForm;
+      const formState = this.props.formState.PostsNewForm;
 
-       //Si no tiene valores todavia, darle un objeto vacio
-       //para que renderice.
-       if(!formState.values){
-         formState.values = {};
-       }
+
 
       return(
       <div className="container post-form-container">
@@ -67,14 +63,14 @@ import PostPreview from '../components/post_preview';
   }
 
 
-  function mapStateToProps( state ){
-    return { formState : state.form }
+  function mapStateToProps( {form} ){
+    return { formState : form }
   }
 
 
-export default reduxForm({
-  form : 'PostsNewForm',
-  validate
-})(
-  connect(mapStateToProps , {createPost} )(PageNewPost)
-)
+  export default connect(mapStateToProps, {createPost} )(
+    reduxForm({
+      form:'PostsNewForm',
+      validatePost
+    })(PageNewPost)
+  );

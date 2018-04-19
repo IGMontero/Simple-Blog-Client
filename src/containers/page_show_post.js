@@ -26,7 +26,7 @@ class PageShowPost extends Component{
 
   render(){
 
-    const { post, userId } = this.props;
+    const { post, authenticatedUser } = this.props;
 
     if(!post){
       return (
@@ -49,7 +49,7 @@ class PageShowPost extends Component{
     // If the user owner is on the page, show the options container,
     //otherwise hide it.
     var collapseClassName = "collapse-container invisible";
-    if(!_.isEmpty(userId) && _.isEqual(userId, post.author)){
+    if(!_.isEmpty(authenticatedUser._id) && _.isEqual(authenticatedUser._id, post.author)){
       collapseClassName = " collapse-container";
     }
 
@@ -59,7 +59,7 @@ class PageShowPost extends Component{
 
       <div className="container show-page-container">
         <div className = "show-page-top-container">
-          <Link to = "/posts" className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back</Link><br/>
+          <Link to={"/posts"} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back to Posts</Link><br/>
         </div>
         <span className="post-topic">{post.generalTopic}</span><br/>
         <span className = "post-date">{postDate}</span>
@@ -92,10 +92,10 @@ class PageShowPost extends Component{
 }
 
 
-function mapStateToProps( { posts , user } , ownProps){
+function mapStateToProps( { posts , authenticatedUser } , ownProps){
   return {
     post : posts[ownProps.match.params.id],
-    userId : user
+    authenticatedUser
   };
 }
 

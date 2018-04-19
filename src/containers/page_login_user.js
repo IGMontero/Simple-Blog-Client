@@ -2,6 +2,10 @@ import React , { Component } from 'react';
 import { Field , reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import _ from 'lodash';
+
+//Functions
+import { validateUser } from '../utils/validation/index';
 
 //Components
 import { renderFieldInput } from '../utils/fields/renderField';
@@ -11,16 +15,44 @@ import { logInUser } from '../actions/index';
 
 class PageLoginUser extends Component {
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      errorMessage : '',
+      show:false
+    }
+
+  }
+
+  componentWillReceiveProps(newProps){
+     const { errorMessage } = newProps;
+     if(!_.isEmpty(errorMessage)){
+     this.setState({errorMessage});
+   }
+  }
+
+  showAlert(){
+    this.setState({show:true});
+  }
 
   onSubmit(values){
-    this.props.logInUser(values , () => {
-      this.props.history.push('/')
-    })
+    this.props.logInUser(values , this.showAlert.bind(this) ,  () => {
+      this.props.history.push('/');
+    });
   }
+
 
   render(){
 
     const { handleSubmit } = this.props;
+
+
+    var alertClassName = "alert alert-danger";
+
+    if(!this.state.show){
+      alertClassName += " invisible";
+    }
 
     return(
       <div className="container user-form-container">
@@ -42,13 +74,23 @@ class PageLoginUser extends Component {
             <button type="submit" className="btn btn-success custom-button">Submit</button>
           </div>
         </form>
+        <div className={alertClassName} role="alert">
+          {this.state.errorMessage}
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default connect(null, { logInUser })(
+function mapStateToProps( { errorMessage } ){
+  return {
+    errorMessage
+  }
+}
+
+export default connect(mapStateToProps, { logInUser })(
   reduxForm({
-    form:'UserLoginForm'
+    form:'UserLoginForm',
+    validate: validateUser,
   })(PageLoginUser)
 );

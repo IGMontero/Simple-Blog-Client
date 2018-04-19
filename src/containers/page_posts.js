@@ -22,6 +22,7 @@ class PagePosts extends Component{
       return(
         <PostMiniature
         key= {post._id}
+        author = {post.author}
         post = {post}
         />
       )
@@ -37,11 +38,11 @@ class PagePosts extends Component{
       )
     }
 
-    const {userId} = this.props;
+    const { authenticatedUser } = this.props;
 
     //Show the create post window only if the user is authenticated.
     var createPostClassName = "btn btn-warning create-post-button";
-    if(_.isEmpty(userId)){
+    if(_.isEmpty(authenticatedUser._id)){
       createPostClassName += " invisible";
     }
 
@@ -57,10 +58,10 @@ class PagePosts extends Component{
   }
 }
 
-function mapStateToProps ({posts , user}){
+function mapStateToProps ({posts , authenticatedUser}){
   return {
     posts : posts,
-    userId : user
+    authenticatedUser
   }
 }
 

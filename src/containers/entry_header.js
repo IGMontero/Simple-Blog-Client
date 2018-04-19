@@ -11,7 +11,7 @@ class EntryHeader extends Component{
 
     //hardcode ftw
     var title,subtitle;
-    const post = this.props.post;
+    const { post , user } = this.props;
 
     //Provisional, deberia controlarlo desde el state.
     switch(path){
@@ -41,6 +41,9 @@ class EntryHeader extends Component{
         title = 'Log In';
         subtitle = 'Welcome back !';
       break;
+      case '/users/:id':
+        title = user ? `${user.username}'s profile` : '' ;
+      break;
     }
 
 
@@ -56,8 +59,11 @@ class EntryHeader extends Component{
   }
 }
 
-function mapStateToProps( { posts } , ownState){
-  return { post: posts[ownState.match.params.id] }
+function mapStateToProps( { posts , users } , ownState){
+  return {
+    post: posts[ownState.match.params.id],
+    user : users[ownState.match.params.id]
+   }
 }
 
 

@@ -5,7 +5,7 @@ export default class PostPreview extends Component{
 
   render(){
 
-    const values = this.props.values;
+    const { values } = this.props;
 
     if(!values){
       return(
@@ -21,10 +21,10 @@ export default class PostPreview extends Component{
 
     return(
       <div className = "post-preview-container">
-      <h1 className= "mb-3 show-page-title">{title}</h1>
-      <h4 className="mb-3 show-page-subtitle">{subtitle}</h4>
-      <img src = {image} className="show-page-image" />
-      <p className="post-preview-content" dangerouslySetInnerHTML={ {__html:marked(content)} }></p>
+        <h1 className= "mb-3 show-page-title">{title}</h1>
+        <h4 className="mb-3 show-page-subtitle">{subtitle}</h4>
+        <img src = {image} className="show-page-image" />
+        <p className="post-preview-content" dangerouslySetInnerHTML={ {__html:marked(content)} }></p>
       </div>
     )
   }

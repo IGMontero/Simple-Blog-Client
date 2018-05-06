@@ -5,11 +5,35 @@ import { fetchPost , deletePost } from '../actions/index';
 import marked from 'marked';
 import _ from "lodash";
 
+//Components
+
+import LoadingScreen from '../components/loading_screen';
+
 class PageShowPost extends Component{
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      showPost : false
+    }
+
+    this.showPost = this.showPost.bind(this);
+    this.hidePost = this.hidePost.bind(this);
+
+  }
+
+  showPost(){
+    this.setState({showPost:true});
+  }
+
+  hidePost(){
+    this.setState({showPost : false});
+  }
 
   componentWillMount(){
     const id = this.props.match.params.id;
-    this.props.fetchPost(id);
+    this.props.fetchPost(id , this.showPost);
   }
 
 
@@ -27,10 +51,11 @@ class PageShowPost extends Component{
   render(){
 
     const { post, authenticatedUser } = this.props;
+    const { showPost } = this.state;
 
-    if(!post){
+    if(!post||!showPost){
       return (
-        <div>Loading..</div>
+        <LoadingScreen type='spinningBubbles' color='black' />
       )
     }
 
@@ -58,7 +83,7 @@ class PageShowPost extends Component{
     return(
 
       <div className="container show-page-container">
-        <div className = "show-page-top-container">
+        <div className = "page-top-container">
           <Link to={"/posts"} className="btn btn-danger custom-button back-button"><i className="fas fa-arrow-left"></i> Back to Posts</Link><br/>
         </div>
         <span className="post-topic">{post.generalTopic}</span><br/>

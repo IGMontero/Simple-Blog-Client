@@ -14,6 +14,8 @@ import PageEditPost from './containers/page_edit_post';
 import PageRegisterUser from './containers/page_register_user';
 import PageLoginUser from './containers/page_login_user';
 import PageUserProfile from './containers/page_user_profile';
+import PageEditUser from './containers/page_edit_user';
+
 
 class App extends Component {
 
@@ -22,6 +24,7 @@ class App extends Component {
         <div className = "App" >
           <NavBar />
           <Switch>
+            <Route path = "/users/:id/edit" component= {EntryHeader} />
             <Route path = "/users/:id" component = {EntryHeader} />
             <Route path = "/login" component = {EntryHeader} />
             <Route path = "/register" component = {EntryHeader} />
@@ -32,6 +35,7 @@ class App extends Component {
             <Route path = "/" component={EntryHeader} />
           </Switch>
           <Switch>
+            <Route path = "/users/:id/edit" component = {PageEditUser} />
             <Route path = "/users/:id" component = {PageUserProfile} />
             <Route path = "/login" component = {PageLoginUser} />
             <Route path = "/register" component = {PageRegisterUser} />

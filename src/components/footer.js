@@ -7,7 +7,7 @@ export default function(){
         Made by Ignacio Montero
       </div>
       <div className="footer-contact-buttons">
-        <a href="https://github.com/nachito333"><i class="fab fa-github-square"></i></a>
+        <a href="https://github.com/nachito333"><i className="fab fa-github-square"></i></a>
       </div>
     </footer>
   )

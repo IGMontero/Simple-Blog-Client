@@ -4,12 +4,38 @@ import { fetchPosts } from '../actions';
 import _ from 'lodash';
 import { Link } from 'react-router-dom'
 
+//Components
+import LoadingScreen from '../components/loading_screen';
 import PostMiniature from '../components/post_miniature';
 
 class PagePosts extends Component{
 
+  constructor(props){
+    super(props);
+
+    this.state = {
+      showPosts : false
+    }
+
+    this.showPosts = this.showPosts.bind(this);
+    this.hidePosts = this.hidePosts.bind(this);
+  }
+
+
+  componentWillUnmount(){
+    this.hidePosts();
+  }
+
   componentWillMount(){
-    this.props.fetchPosts();
+    this.props.fetchPosts(this.showPosts);
+  }
+
+  showPosts(){
+    this.setState({showPosts:true});
+  }
+
+  hidePosts(){
+    this.setState({showPosts:false});
   }
 
   renderPosts(){
@@ -32,13 +58,16 @@ class PagePosts extends Component{
   }
 
   render(){
-    if(!this.props.posts){
+
+    const { authenticatedUser } = this.props;
+    const { showPosts } = this.state;
+
+    if(!this.props.posts||!showPosts){
       return(
-        <div>Loading...</div>
+        <LoadingScreen type='spinningBubbles' color='black' />
       )
     }
 
-    const { authenticatedUser } = this.props;
 
     //Show the create post window only if the user is authenticated.
     var createPostClassName = "btn btn-warning create-post-button";

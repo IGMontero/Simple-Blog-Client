@@ -9,7 +9,6 @@ import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../u
 export default class PostForm extends Component{
 
   render(){
-
   const { onSubmit } = this.props;
   return(
     <form onSubmit={onSubmit}>
@@ -28,6 +27,7 @@ export default class PostForm extends Component{
       <Field
       label="Content"
       name = "content"
+      size="big"
       component={renderFieldTextArea}
       />
       <Field

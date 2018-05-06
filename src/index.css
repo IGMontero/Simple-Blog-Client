@@ -16,6 +16,14 @@ a:link, a:visited {
     color:inherit;
 }
 
+.loading-screen{
+  text-align: center;
+}
+
+.react-loading{
+  margin:auto; 
+}
+
 .nav-link{
   cursor:pointer;
 }
@@ -99,6 +107,16 @@ a:link, a:visited {
   margin-top:15px;
   opacity:0.8;
   font-family: 'Noto Sans', sans-serif;
+}
+
+code{
+  background-color:#dedfe0 !important;
+  padding:3px;
+  border-radius:5px;
+}
+
+pre{
+  overflow: hidden;
 }
 
 .post-preview-content a , .show-page-content a{
@@ -268,6 +286,7 @@ a:link, a:visited {
   margin-top:80px;
 }
 
+
 .miniature-sub-container{
   border-radius:15px;
   transition:0.5s;
@@ -352,9 +371,14 @@ form{
   margin-top:50px;
 }
 
-.content-field{
+.big-textarea{
   resize: none;
   height:350px !important;
+}
+
+.small-textarea{
+  resize:none;
+  height:100px !important;
 }
 
 .collapse-container{
@@ -411,7 +435,7 @@ form{
   margin-bottom:50px;
 }
 
-.show-page-top-container{
+.page-top-container{
   text-align:center;
   margin-bottom:50px;
 }
@@ -430,18 +454,76 @@ form{
   font-weight: 600;
 }
 
-.user-card-profile-picture{
-  width:150px;
-  height:150px;
-  border-radius:50%;
+.user-card-profile-picture-container{
   float:left;
+  text-align: center;
 }
+
+.profile-image{
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  border:4px solid steelblue;
+}
+
+
+.profile-image-input-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:97%;
+  height:97%;
+  border-radius:50%;
+  opacity:0;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+#profile-image-input{
+  visibility:hidden;
+  position:absolute;
+}
+
+
+
+.profile-image-input-overlay span{
+  font-size:20px;
+  color:white;
+  position:absolute;
+  bottom:25px;
+  left:68px;
+  height:30px;
+  text-shadow: 2px 2px black;
+}
+
+.profile-image-input-overlay:hover{
+  transition:0.3s;
+  opacity:1;
+}
+
+.profile-image-input-container{
+    position:relative;
+    text-align:center;
+    display: inline-block;
+    width:auto;
+}
+
+
+.custom-file-input{
+  width:150px;
+}
+
+.custom-file{
+  text-align:left;
+}
+
 
 .user-card-info{
   display:inline-block;
   margin-left:20px;
   width:700px;
 }
+
 
 .user-card-description{
   font-size:25px;
@@ -516,4 +598,20 @@ form{
 .profile-show-options button:focus{
   border-bottom:1px solid #31343a;
   outline:none;
+}
+
+.page-edit-user-container{
+  width:70%;
+}
+
+.page-edit-user-form-container{
+  padding:20px;
+}
+
+.settings-option{
+  cursor:pointer;
+}
+
+.settings-option-selected{
+  background-color:#3bb1ba;
 }

@@ -44,8 +44,6 @@ import PostPreview from '../components/post_preview';
 
       const formState = this.props.formState.PostsNewForm;
 
-
-
       return(
       <div className="container post-form-container">
         <div className="form-top-container">

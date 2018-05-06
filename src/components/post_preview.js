@@ -5,12 +5,10 @@ export default class PostPreview extends Component{
 
   render(){
 
-    const { values } = this.props;
+    var { values } = this.props;
 
     if(!values){
-      return(
-        <div>Loading..</div>
-      )
+      values = {};
     }
 
     const title = values.title ? values.title : '{No title}';

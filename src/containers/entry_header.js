@@ -44,6 +44,8 @@ class EntryHeader extends Component{
       case '/users/:id':
         title = user ? `${user.username}'s profile` : '' ;
       break;
+      case '/users/:id/edit':
+        title = 'Settings';
     }
 
 

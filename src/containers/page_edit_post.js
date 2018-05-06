@@ -2,15 +2,19 @@ import React,{Component} from 'react';
 import { Field, reduxForm , change } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 //actions
 import { fetchPost , editPost } from '../actions/index';
 
-//Functions
+//Components
 import { validatePost } from '../utils/validation/index';
 import { renderFieldInput , renderFieldTextArea , renderFieldSelect } from '../utils/fields/renderField';
 import PostOptionsNav from '../components/post_options_nav';
 import PostForm from '../components/post_form';
 import PostPreview from '../components/post_preview';
+import LoadingScreen from '../components/loading_screen';
+
+
 
 class PageEditPost extends Component{
 
@@ -36,6 +40,24 @@ class PageEditPost extends Component{
 
   }
 
+  componentWillMount(){
+    const { authenticatedUser } = this.props;
+    //Redirect the user to the login page if he is not authenticated.
+    if(_.isEmpty(authenticatedUser)){
+      this.props.history.push('/login');
+    }
+  }
+
+  componentWillReceiveProps(newProps){
+    const { post , authenticatedUser } = newProps;
+    //Check if the authenticated user is the post owner.
+    //If he isn't ,redirect to /posts.
+    if(post && !_.isEqual(authenticatedUser._id, post.author)){
+        this.props.history.push('/posts');
+      }
+
+  }
+
   componentDidMount(){
     const id = this.props.match.params.id;
     this.props.fetchPost(id);
@@ -44,15 +66,15 @@ class PageEditPost extends Component{
   render(){
 
     const post = this.props.post;
-    const { handleSubmit } = this.props;
-
+    const { handleSubmit ,authenticatedUser } = this.props;
     const formState = this.props.formState.PostsEditForm;
-
 
     if(!post)
       return(
-        <div>Loading...</div>
+        <LoadingScreen type='spinningBubbles' color='black' />
       )
+
+
 
     return(
       <div className="container post-form-container">
@@ -70,12 +92,13 @@ class PageEditPost extends Component{
   }
 }
 
-function mapStateToProps( { posts , form } , ownProps ){
+function mapStateToProps( { posts , form , authenticatedUser} , ownProps ){
   const post = posts[ownProps.match.params.id];
   return {
     post : posts[ownProps.match.params.id],
     initialValues : posts[ownProps.match.params.id],
-    formState : form
+    formState : form,
+    authenticatedUser
     }
 }
 

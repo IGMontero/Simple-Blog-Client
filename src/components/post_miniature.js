@@ -14,7 +14,7 @@ export default function( { post:{title,subtitle,content,image,_id ,generalTopic 
           <Link to = {`/posts/${_id}`}>
             <div className = "miniature-image-container" >
               <img src={image} />
-              <img className="miniature-profile-picture" src= "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png" />
+              <img className="miniature-profile-picture" src={author&&author.profileImage ? author.profileImage : 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png'} />
               <Link to={ author ? `/users/${author._id}` : '/'} className="miniature-author-name">{!_.isEmpty(author) ?  `${author.firstName} ${author.lastName}` : ''}</Link>
                 <div className= "miniature-image-overlay" >
                   <button className="btn btn-default">Read More</button>

@@ -26,8 +26,8 @@ export function renderFieldInput(field){
 export function renderFieldTextArea(field){
 
 
-  const { meta : { error , submitFailed} } = field;
-  const inputClassName = `form-control content-field ${ submitFailed && error ? 'is-invalid' : ''}`;
+  const { meta : { error , submitFailed} , size } = field;
+  const inputClassName = `form-control ${size=='small' ? 'small-textarea' : 'big-textarea'} ${ submitFailed && error ? 'is-invalid' : ''}`;
 
   return(
     <div className="form-group">

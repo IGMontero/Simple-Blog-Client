@@ -1,16 +1,33 @@
 import { FETCH_POSTS , FETCH_POST , CREATE_POST
    , DELETE_POST , EDIT_POST , REGISTER_USER
    , LOGIN_USER , LOGOUT_USER  , FETCH_USER,
-   AUTHENTICATION_ERROR } from './types';
+   AUTHENTICATION_ERROR , EDIT_USER } from './types';
 import axios from 'axios';
 
 const REDIRECT_DELAY = 400;
 
-export function fetchUser(id){
+
+export function editUser(id , values, callback){
+  return(dispatch) => {
+    axios.put(`/users/${id}` , values)
+    .then((response) => {
+      callback();
+      dispatch({
+        type:EDIT_USER,
+        payoad:id
+      });
+    })
+  }
+}
+
+export function fetchUser(id ,dataLoaded){
 
   return(dispatch) => {
     axios.get(`/users/${id}`)
     .then( (response) =>{
+      if(dataLoaded){
+        dataLoaded();
+      }
       dispatch({
         type:FETCH_USER,
         payload:response
@@ -45,7 +62,6 @@ export function logInUser( values, showAlert , callback ){
    .then( (response) =>
     {
       //Emulate a server delay
-     //setTimeout( () => callback(),REDIRECT_DELAY);
      callback();
      dispatch({
        type:LOGIN_USER,
@@ -71,7 +87,6 @@ export function registerUser(values, showAlert ,callback){
   return (dispatch)=>{
     axios.post('/register', values)
     .then( (response) => {
-      //setTimeout( () => callback(),REDIRECT_DELAY);
       callback();
       dispatch({
       type:REGISTER_USER,
@@ -91,29 +106,39 @@ export function registerUser(values, showAlert ,callback){
   }
 }
 
-export function fetchPosts(){
+export function fetchPosts( showPosts ){
   return (dispatch) =>{
     axios.get('/posts')
-    .then( (response) => dispatch({
+    .then( (response) => {
+      showPosts();
+      dispatch({
       type:FETCH_POSTS,
       payload:response
-    }))
+    });
+      }
+    )
   }
 }
 
-export function fetchPost(id){
+export function fetchPost(id , showPost){
   return (dispatch) => {
     axios.get(`/posts/${id}`)
-    .then( (response) => dispatch({
-      type:FETCH_POST,
-      payload:response
-    }))
+    .then( (response) => {
+      //Show posts after loading their data.
+      if(showPost){
+        showPost();
+      }
+      dispatch({
+        type:FETCH_POST,
+        payload:response
+    })
+    }
+  )
   }
 }
 
 export function deletePost(id , callback){
   return (dispatch) => {
-    //setTimeout( () => callback(),REDIRECT_DELAY);
     axios.delete(`/posts/${id}`)
     .then( (response) => {
       callback();
@@ -125,7 +150,7 @@ export function deletePost(id , callback){
   .catch((err) =>{
     console.log(err);
     const response = err.response;
-    if(response.status==401){
+    if(response.status && response.status==401){
       console.log(response.data);
     }else{
       console.log("Unhandled error.");
@@ -138,7 +163,6 @@ export function editPost(id,values,callback){
   return (dispatch) =>{
     axios.put(`/posts/${id}`,values)
     .then ((response) => {
-      //setTimeout( () => callback(),REDIRECT_DELAY);
       callback();
       dispatch({
       type:EDIT_POST,
@@ -160,7 +184,6 @@ export function createPost(values,callback){
   return (dispatch)=>{
     axios.post(`/posts`,values)
     .then((response)=> {
-      //setTimeout( () => callback(),REDIRECT_DELAY);
       callback();
       dispatch({
       type:CREATE_POST,

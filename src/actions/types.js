@@ -8,3 +8,4 @@ export const LOGIN_USER = 'login_user';
 export const LOGOUT_USER = 'logout_user';
 export const FETCH_USER = 'fetch_user'
 export const AUTHENTICATION_ERROR = 'authentication_error'
+export const EDIT_USER = "edit_user";
